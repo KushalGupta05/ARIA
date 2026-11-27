@@ -1,0 +1,20 @@
+[
+  {
+    "metadata": {
+      "source": "MITRE_ATTACK",
+      "type": "technique",
+      "mitre_id": "T1057",
+      "name": "Process Discovery"
+    },
+    "text_content": "Tactics: Discovery\nPlatforms: Windows, Linux, macOS\nDescription: Inspecting a host's process list can reveal which programs are running. In this demo, use the process inventory to compare activity with an approved maintenance window."
+  },
+  {
+    "metadata": {
+      "source": "MITRE_ATTACK",
+      "type": "sub-technique",
+      "mitre_id": "T1071.001",
+      "name": "Web Protocols"
+    },
+    "text_content": "Tactics: Command and Control\nPlatforms: Windows, Linux, macOS\nDescription: HTTP and HTTPS can carry many kinds of traffic. Use this reference to investigate a connection in context. A connection to port 443 alone is insufficient evidence of an incident."
+  }
+]

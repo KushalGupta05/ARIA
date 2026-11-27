@@ -1,0 +1,18 @@
+[project]
+name = "rag-pipeline"
+version = "0.1.0"
+description = "Retrieval, reranking and investigation summaries for the ARIA analyst console."
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "numpy>=2.0",
+    "python-dotenv>=1.2.2",
+    "chromadb>=1.5.9",
+    "google-genai>=2.25.0",
+    "huggingface-hub>=1.24.0",
+    "jinja2>=3.1.6",
+    "ollama>=0.6.2",
+    "onnxruntime>=1.28.0",
+    "sentence-transformers>=5.6.0",
+    "tokenizers>=0.22.2",
+]

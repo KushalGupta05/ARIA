@@ -1,0 +1,175 @@
+[
+  {
+    "id": 1,
+    "minutes_ago": 195,
+    "host": "LAB-OPS-01",
+    "ip": "192.0.2.11",
+    "title": "Scheduled inventory on the operations host",
+    "class": 6,
+    "risk": 28,
+    "severity": "LOW",
+    "action": "Review maintenance record",
+    "summary": "The inventory worker collected the process list during the scheduled device audit. The ticket and the observed time window matched.",
+    "techniques": [
+      "T1057 — Process Discovery"
+    ],
+    "references": [],
+    "steps": [
+      "Check the device audit window in the change record."
+    ],
+    "context": {
+      "top_processes": [
+        {
+          "name": "inventory.exe",
+          "pid": 1412,
+          "working_set_mb": 92,
+          "path": "C:\\Demo\\inventory.exe"
+        }
+      ],
+      "external_connections": []
+    },
+    "counters": {
+      "Network_I_ActiveNIC_TCP_APS": 18,
+      "Process_Thread Count": 112,
+      "Process_Working Set": 96468992
+    },
+    "closure": {
+      "disposition": "Benign",
+      "reason": "Matched the scheduled device inventory."
+    }
+  },
+  {
+    "id": 2,
+    "minutes_ago": 112,
+    "host": "LAB-ARCHIVE-02",
+    "ip": "192.0.2.22",
+    "title": "Archive worker exceeded its usual memory window",
+    "class": 1,
+    "risk": 47,
+    "severity": "MEDIUM",
+    "action": "Review the job schedule",
+    "summary": "The archive worker's working set rose during a backup. The case record has no external connections. Check the batch size against the previous run before closing the alert.",
+    "techniques": [],
+    "references": [],
+    "steps": [
+      "Compare the backup window with the job schedule.",
+      "Check whether the working set returned to baseline."
+    ],
+    "context": {
+      "top_processes": [
+        {
+          "name": "archive-worker.exe",
+          "pid": 2300,
+          "working_set_mb": 840,
+          "path": "C:\\Demo\\archive-worker.exe"
+        }
+      ],
+      "external_connections": []
+    },
+    "counters": {
+      "Network_I_ActiveNIC_TCP_APS": 24,
+      "Process_Thread Count": 280,
+      "Process_Working Set": 880803840
+    }
+  },
+  {
+    "id": 3,
+    "minutes_ago": 64,
+    "host": "LAB-SYNC-03",
+    "ip": "192.0.2.33",
+    "title": "Repeated outbound TLS connection from a sync worker",
+    "class": 6,
+    "risk": 66,
+    "severity": "HIGH",
+    "action": "Verify the remote service",
+    "summary": "A sync worker opened a connection to 198.51.100.18 over port 443. Compare the destination with the approved sync configuration before assigning a disposition.",
+    "techniques": [
+      "T1071.001 — Web Protocols"
+    ],
+    "references": [
+      {
+        "source": "MITRE ATT&CK · T1071.001",
+        "description": "Reference for interpreting web traffic. Port 443 alone does not establish intent."
+      }
+    ],
+    "steps": [
+      "Check the sync service's expected destinations.",
+      "Compare connection times with the scheduled transfer."
+    ],
+    "context": {
+      "top_processes": [
+        {
+          "name": "sync-worker.exe",
+          "pid": 3194,
+          "working_set_mb": 220,
+          "path": "C:\\Demo\\sync-worker.exe"
+        }
+      ],
+      "external_connections": [
+        {
+          "local_port": 51120,
+          "remote_address": "198.51.100.18",
+          "remote_port": 443,
+          "owning_process": 3194
+        }
+      ]
+    },
+    "counters": {
+      "Network_I_ActiveNIC_TCP_APS": 160,
+      "Process_Thread Count": 315,
+      "Process_Working Set": 230686720
+    }
+  },
+  {
+    "id": 4,
+    "minutes_ago": 18,
+    "host": "LAB-BUILD-07",
+    "ip": "192.0.2.47",
+    "title": "Build worker thread spike during a release job",
+    "class": 1,
+    "risk": 83,
+    "severity": "CRITICAL",
+    "action": "Review the build host",
+    "summary": "The build worker reached 1,480 threads and a 2,048 MB working set during a release job. A process inventory ran in the same window. The analyst must check whether the release schedule explains both observations.",
+    "techniques": [
+      "T1057 — Process Discovery"
+    ],
+    "references": [
+      {
+        "source": "MITRE ATT&CK · T1057",
+        "description": "Process inventory can be part of a build diagnostic. Correlate the observed inventory with the job timeline."
+      },
+      {
+        "source": "Demo runbook · Build host review",
+        "description": "Compare worker concurrency with the release plan and review the host after the build finishes."
+      }
+    ],
+    "steps": [
+      "Compare the thread spike with the release job's start and finish times.",
+      "Confirm that the build owner requested a process inventory.",
+      "Record the disposition and the matching change ticket."
+    ],
+    "context": {
+      "top_processes": [
+        {
+          "name": "build-worker.exe",
+          "pid": 4120,
+          "working_set_mb": 2048,
+          "path": "C:\\Demo\\build-worker.exe"
+        },
+        {
+          "name": "inventory.exe",
+          "pid": 4176,
+          "working_set_mb": 78,
+          "path": "C:\\Demo\\inventory.exe"
+        }
+      ],
+      "external_connections": []
+    },
+    "counters": {
+      "Network_I_ActiveNIC_TCP_APS": 96,
+      "Process_Thread Count": 1480,
+      "Process_Working Set": 2147483648
+    }
+  }
+]

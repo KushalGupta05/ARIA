@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "Please cite this repository if you use ARIA in your work."
+title: "ARIA: Automated Retrieval and Investigation Agent for Host Telemetry and SOC Triage"
+type: software
+authors:
+  - given-names: Kushal
+    family-names: Gupta
+  - given-names: Krish
+    family-names: Choudhari
+repository-code: "https://github.com/KushalGupta05/ARIA"
+keywords:
+  - security operations
+  - alert triage
+  - host telemetry
+  - retrieval-augmented generation

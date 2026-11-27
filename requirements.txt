@@ -1,0 +1,3 @@
+# Local console API. The optional research pipeline has its own dependencies.
+fastapi==0.136.0
+uvicorn==0.45.0
